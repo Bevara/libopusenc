@@ -1,0 +1,14 @@
+{
+    "name": "libopusenc",
+    "description": "Opus audio encoder (native libopus)",
+    "filters":["encopus"],
+    "help": "This filter encodes a raw S16 PCM audio PID (48kHz) to Opus by calling libopus's native API directly.",
+    "support": [
+        "audio"
+    ],
+    "sources":"https://bevara.ddns.net/sources/libopusenc.accessor",
+    "filter_source":{
+        "encopus" : "enc_opus.c"
+    },
+    "licence_required":false
+}
