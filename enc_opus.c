@@ -292,7 +292,7 @@ GF_FilterRegister OpusEncRegister = {
 	.finalize = opusenc_finalize,
 };
 
-const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE dynCall_encopus_register(GF_FilterSession *session)
+const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE encopus_register(GF_FilterSession *session)
 {
 	return &OpusEncRegister;
 }
@@ -300,5 +300,5 @@ const GF_FilterRegister * EMSCRIPTEN_KEEPALIVE dynCall_encopus_register(GF_Filte
 #include "filter_register.h"
 __attribute__((constructor))
 void register_encopus(void) {
-    gf_filter_auto_register("encopus", dynCall_encopus_register);
+    gf_filter_auto_register("encopus", encopus_register);
 }
