@@ -1,6 +1,6 @@
 {
     "name": "libopusenc",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Opus audio encoder (native libopus)",
     "filters":["encopus"],
     "help": "This filter encodes a raw S16 PCM audio PID (48kHz) to Opus by calling libopus's native API directly.",
@@ -11,7 +11,7 @@
     "filter_source":{
         "encopus" : "enc_opus.c"
     },
-    "using": ["solver_minimal_1", "solver_1"],
+    "using": ["mm_solver_minimal_1.0.1", "mm_solver_1.0.1"],
     "patents": {
         "status": "royalty-free",
         "note": "Opus (RFC 6716), royalty-free declarations to the IETF",
