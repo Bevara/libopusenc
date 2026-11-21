@@ -130,6 +130,12 @@ static GF_Err opusenc_configure_pid(GF_Filter *filter, GF_FilterPid *pid, Bool i
 	gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_CODECID, &PROP_UINT(GF_CODECID_OPUS));
 	gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_AUDIO_FORMAT, NULL);
 	gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_UNFRAMED, NULL);
+	/* Packet times below are counted in samples at 48 kHz, so that is the
+	 * output timescale - whatever the input's was. Copying the input's
+	 * carried e.g. 24000 over from HE-AAC (whose timescale is its 24 kHz
+	 * core rate, while faad outputs 48 kHz): every 20 ms frame then lasted
+	 * 40 ms and the Opus track came out twice as long as the source. */
+	gf_filter_pid_set_property(ctx->opid, GF_PROP_PID_TIMESCALE, &PROP_UINT(OPUSENC_TARGET_RATE));
 
 	gf_filter_set_name(filter, "encopus:libopus");
 
@@ -181,6 +187,7 @@ static GF_Err opusenc_encode_frame(GF_OpusEncCtx *ctx, const s16 *pcm)
 		{
 			memcpy(output, packet, ret);
 			gf_filter_pck_set_cts(dst_pck, ctx->samples_done);
+			gf_filter_pck_set_duration(dst_pck, OPUSENC_FRAME_SAMPLES);
 			gf_filter_pck_set_sap(dst_pck, GF_FILTER_SAP_1);
 			gf_filter_pck_send(dst_pck);
 		}
