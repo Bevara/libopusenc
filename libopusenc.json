@@ -16,7 +16,8 @@
     "using": [
         "mm_solver_1.0.4",
         "mm_solver_1.0.5",
-        "mm_solver_1.0.6"
+        "mm_solver_1.0.6",
+        "mm_solver_1.0.7"
     ],
     "patents": {
         "status": "royalty-free",
